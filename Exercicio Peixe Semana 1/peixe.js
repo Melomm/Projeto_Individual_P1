@@ -30,7 +30,7 @@ function create () {
     
     this.anims.create({
         key: 'spin',
-        frames: this.anims.generateFrameNumbers('fish', { start: 0, end: 60 }),
+        frames: this.anims.generateFrameNumbers('fish', { start: 0, end: 29 }),
         frameRate: 10,
         repeat: -1
     });
