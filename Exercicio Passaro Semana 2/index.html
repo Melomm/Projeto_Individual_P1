@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <title>Exercício do Pássaro</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+
+ var config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+
+        scene: {
+            preload: preload,
+            create: create,
+            update: update
+        }
+    };
+
+    var game = new Phaser.Game(config);
+
+    function preload() {
+        this.load.image('background', 'assets/bg_space.png');
+        this.load.spritesheet('bird', 'assets/bird-purple.png', {frameWidth: 75, frameHeight:75})
+    }
+
+    function create() {
+        this.add.image(400, 300, 'background').setScale(1.2);
+        birdy = this.add.sprite(50,50, 'bird').setScale(1.3);
+
+        this.anims.create({
+            key: 'fly',
+            frames: this.anims.generateFrameNumbers('bird', { start: 0, end: 7}),
+            frameRate: 15,
+            repeat: -1
+        });
+
+        birdy.anims.play('fly', true);
+
+    }
+
+    function update() { 
+
+        if (birdy.x === 50) {
+            birdy.setFlip(false, false);
+            birdy.go = true;
+        }
+        if (birdy.x < 750 && birdy.go === true) {
+            birdy.x += 5;
+        }
+        if (birdy.x === 750) {
+            birdy.setFlip(true, false);
+            birdy.go = false;
+        }
+        if (birdy.x > 50 && birdy.go === false) {
+            birdy.x -= 5;
+        }
+        if (birdy.y === 50) {
+            birdy.goup = true;
+        }
+        if (birdy.y < 750 && birdy.goup === true ) {
+            birdy.y += 1;
+        }
+        if (birdy.y === 560) {
+            birdy.goup = false;
+        }
+        if (birdy.y > 0 && birdy.goup === false) {
+            birdy.y -= 1;
+        }
+        
+    }
+
+</script>
+
+</body>
+</html>
+
+
